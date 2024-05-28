@@ -1,0 +1,34 @@
+kind: ImageStream
+apiVersion: image.openshift.io/v1
+metadata:
+  annotations:
+    opendatahub.io/notebook-image-creator: nebula0248
+    opendatahub.io/notebook-image-desc: 'An image based on 2024.1 PyTorch base image that has ffmpeg, gstreamer1-libav and espeak-ng installed.'
+    opendatahub.io/notebook-image-name: Custom Image for Hugging Face Demo
+    opendatahub.io/notebook-image-url: quay.io/nebula0248/openshift-ai-hugging-face-demo
+    opendatahub.io/notebook-python-dependencies: '[{"name":"PyTorch","version":"2.2"},{"name":"Tensorboard","version":"2.16"},{"name":"Boto3","version":"1.34"},{"name":"Kafka-Python","version":"2.0"},{"name":"Kfp","version":"2.7"},{"name":"Matplotlib","version":"3.8"},{"name":"Numpy","version":"1.26"},{"name":"Pandas","version":"2.2"},{"name":"Scikit-learn","version":"1.4"},{"name":"Scipy","version":"1.12"},{"name":"Odh-Elyra","version":"3.16"},{"name":"PyMongo","version":"4.6"},{"name":"Pyodbc","version":"5.1"}, {"name":"Codeflare-SDK","version":"0.16"}, {"name":"Sklearn-onnx","version":"1.16"}, {"name":"Psycopg","version":"3.1"}, {"name":"MySQL Connector/Python","version":"8.3"}]'
+    opendatahub.io/notebook-software: '[{"name":"CUDA","version":"12.1"},{"name":"Python","version":"v3.9"},{"name":"PyTorch","version":"2.2"}]'
+    opendatahub.io/recommended-accelerators: '["nvidia.com/gpu"]'
+  name: custom-custom-image-for-hugging-face-demo
+  namespace: redhat-ods-applications
+  labels:
+    app.kubernetes.io/created-by: byon
+    opendatahub.io/dashboard: 'true'
+    opendatahub.io/notebook-image: 'true'
+spec:
+  lookupPolicy:
+    local: true
+  tags:
+    - name: latest
+      annotations:
+        opendatahub.io/notebook-python-dependencies: '[{"name":"PyTorch","version":"2.2"},{"name":"Tensorboard","version":"2.16"},{"name":"Boto3","version":"1.34"},{"name":"Kafka-Python","version":"2.0"},{"name":"Kfp","version":"2.7"},{"name":"Matplotlib","version":"3.8"},{"name":"Numpy","version":"1.26"},{"name":"Pandas","version":"2.2"},{"name":"Scikit-learn","version":"1.4"},{"name":"Scipy","version":"1.12"},{"name":"Odh-Elyra","version":"3.16"},{"name":"PyMongo","version":"4.6"},{"name":"Pyodbc","version":"5.1"},{"name":"Codeflare-SDK","version":"0.16"},{"name":"Sklearn-onnx","version":"1.16"},{"name":"Psycopg","version":"3.1"},{"name":"MySQL Connector/Python","version":"8.3"},{"name":"ffmpeg","version":"5.1.4","visible":true},{"name":"espeak-ng\t","version":"1.50","visible":true}]'
+        opendatahub.io/notebook-software: '[{"name":"CUDA","version":"12.1"},{"name":"Python","version":"v3.9"},{"name":"PyTorch","version":"2.2"}]'
+        openshift.io/imported-from: quay.io/nebula0248/openshift-ai-hugging-face-demo
+      from:
+        kind: DockerImage
+        name: quay.io/nebula0248/openshift-ai-hugging-face-demo
+      generation: 2
+      importPolicy:
+        importMode: Legacy
+      referencePolicy:
+        type: Source
